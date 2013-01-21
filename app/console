@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+/*
+ * This file is part of the Voycer confluence xml-rpc backup.
+ *
+ * (c) Voycer AG <info@voycer.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use Voycer\Confluence\Command\ExportCommand;
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+$application->add(new \Voycer\Confluence\Command\PdfExportCommand());
+$application->run();

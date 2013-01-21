@@ -1,0 +1,33 @@
+{
+    "name":"voycer/confluence-xmlrpc-pdf-export",
+    "description":"Voycer helper application to export a full Confluence space as a pdf.",
+    "version":"0.0.1",
+    "type":"library",
+    "keywords":["confluence", "voycer", "pdf", "export"],
+    "homepage":"http://www.voycer.biz",
+    "license":"MIT",
+    "support":{
+        "email":"info@voycer.de",
+        "issues":"http://voycer.myjetbrains.com/youtrack/",
+        "source":"https://github.com/VoycerAG/confluence-xmlrpc-pdf-export"
+    },
+    "authors":[
+        {
+            "name":"Nino Wagensonner",
+            "email":"n.wagensonner@voycer.com"
+        },
+        {
+            "name":"Robert Gruber",
+            "email":"r.gruber@voycer.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Voycer": "src/"
+        }
+    },
+    "require": {
+        "symfony/console": "dev-master",
+        "zendframework/zendframework1": "*"
+    }
+}
