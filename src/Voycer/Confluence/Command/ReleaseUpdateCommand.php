@@ -120,7 +120,7 @@ class ReleaseUpdateCommand extends Command
 
         $pageUpdateOptions =   array(
             'versionComment' => $comment,
-            'minorEdit' => true
+            'minorEdit' => false
         );
 
         if ($token) {
