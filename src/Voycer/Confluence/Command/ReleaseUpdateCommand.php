@@ -42,6 +42,11 @@ class ReleaseUpdateCommand extends Command
                 InputArgument::REQUIRED,
                 'The name of the page to be used'
             )
+            ->addArgument(
+                'comment',
+                InputArgument::OPTIONAL,
+                'comment'
+            )
             ->addOption('username', null, InputOption::VALUE_REQUIRED,
                 'The username to access confluence'
             )
@@ -100,6 +105,7 @@ class ReleaseUpdateCommand extends Command
         $pageId = $input->getArgument('pageId');
         $username = $input->getOption('username');
         $password = $input->getOption('password');
+        $comment = $input->getArgument('comment');
 
         if ($password === null) {
             $dialog = $this->getHelper('dialog');
@@ -111,8 +117,8 @@ class ReleaseUpdateCommand extends Command
         $token = $xmlRcpClient->call('confluence1.login', array('username' => $username, 'password' => $password));
 
         $pageUpdateOptions =   array(
-            'versionComment' => 'some update comment',
-            'minorEdit' => true
+            'versionComment' => $comment,
+            'minorEdit' => false
         );
 
         if ($token) {
@@ -126,9 +132,9 @@ class ReleaseUpdateCommand extends Command
                 return -1;
             }
 
-            $page['content'] = '{code}' . $this->getStdin(). '{code}';
+            $page['content'] = '{noformat}' . $this->getStdin(). '{noformat}';
 
-            $downloadUrl = $xmlRcpClient->call(
+            $result = $xmlRcpClient->call(
                 'confluence1.updatePage',
                 array('token' => $token, 'page' => $page, 'pageUpdateOptions' => $pageUpdateOptions)
             );
@@ -138,8 +144,10 @@ class ReleaseUpdateCommand extends Command
             return -1;
         }
 
+        if (is_array($result)) {
+            $output->writeln("<info>update successful.</info>");
+        }
 
-        print_r($downloadUrl);
         return 0;
     }
 }
