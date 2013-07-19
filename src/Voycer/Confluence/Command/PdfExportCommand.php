@@ -50,13 +50,13 @@ class PdfExportCommand extends Command
             ->addOption(
                 'username',
                 null,
-                InputArgument::REQUIRED,
+                InputOption::VALUE_REQUIRED,
                 'The username to access confluence'
             )
             ->addOption(
                 'password',
                 null,
-                InputArgument::OPTIONAL,
+                InputOption::VALUE_OPTIONAL,
                 'The password to access confluence'
             )
         ;
