@@ -70,7 +70,7 @@ class ReleaseUpdateCommand extends Command
 
         $result = '';
 
-        while (($content = fgets(STDIN)))
+        while (($content = fgets(STDIN, 24 * 1024 * 1024)))
         {
             $result .= $content;
         }
@@ -134,7 +134,7 @@ class ReleaseUpdateCommand extends Command
                 return -1;
             }
 
-            $page['content'] = '{noformat}' . $stdin. '{noformat}';
+            $page['content'] = $stdin;
 
             $result = $xmlRcpClient->call(
                 'confluence1.updatePage',
