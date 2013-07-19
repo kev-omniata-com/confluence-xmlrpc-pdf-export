@@ -96,7 +96,9 @@ class ReleaseUpdateCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (trim($this->getStdin()) === '') {
+        $stdin = $this->getStdin();
+
+        if (trim($stdin) === '') {
             $output->writeln("<error>No content provided! Please pipe output to this script.</error>");
             return -1;
         }
@@ -118,7 +120,7 @@ class ReleaseUpdateCommand extends Command
 
         $pageUpdateOptions =   array(
             'versionComment' => $comment,
-            'minorEdit' => false
+            'minorEdit' => true
         );
 
         if ($token) {
@@ -132,7 +134,7 @@ class ReleaseUpdateCommand extends Command
                 return -1;
             }
 
-            $page['content'] = '{noformat}' . $this->getStdin(). '{noformat}';
+            $page['content'] = '{noformat}' . $stdin. '{noformat}';
 
             $result = $xmlRcpClient->call(
                 'confluence1.updatePage',
